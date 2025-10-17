@@ -116,6 +116,17 @@ func (t *Template) parse() {
 
 }
 
+// SpaceHolders get space holders of the template.
+func (t *Template) SpaceHolders() map[string]int {
+	spaceHolder := make(map[string]int, len(t.args))
+	for i := 0; i < len(t.args); i++ {
+		count := spaceHolder[b2s(t.args[i])]
+		spaceHolder[b2s(t.args[i])] = count + 1
+	}
+	return spaceHolder
+
+}
+
 // ExecString renders the template with the provided arguments.
 // If strict is true, it returns an error if any placeholder in the template
 // does not have a corresponding entry in args.
