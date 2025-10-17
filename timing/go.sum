@@ -1,3 +1,5 @@
+github.com/tylitianrui/easytmpl v1.0.0 h1:zdgGO9/pVA19rb4pDpM4BqqBQXuoWCENX+KFnburW6E=
+github.com/tylitianrui/easytmpl v1.0.0/go.mod h1:7Iab2kva12vgiOLhBYBPNoglt8K4MRAe1ra/ZGxGM+o=
 github.com/valyala/bytebufferpool v1.0.0 h1:GqA5TC/0021Y/b9FG4Oi9Mr3q7XYx6KllzawFIhcdPw=
 github.com/valyala/bytebufferpool v1.0.0/go.mod h1:6bBcMArwyJ5K/AmCkWv1jt77kVWyCJ6HpOuEn7z0Csc=
 github.com/valyala/fasttemplate v1.2.2 h1:lxLXG0uE3Qnshl9QyaK6XJxMXlQZELvChBOCmQD0Loo=
