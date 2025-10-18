@@ -18,11 +18,11 @@ goos: darwin
 goarch: amd64
 pkg: github.com/tylitianrui/easytmpl/timing
 cpu: Intel(R) Core(TM) i5-7360U CPU @ 2.30GHz
-Benchmark_GoTextTemplate_ExecuteWith10SpaceHolder-4               497427              2177 ns/op             464 B/op         20 allocs/op
-Benchmark_FastTemplate_ExecuteStringWith10SpaceHolder-4          1920590               749.1 ns/op           443 B/op         12 allocs/op
-Benchmark_easytmpl_ExecuteStringWith10SpaceHolder-4            3118250               554.4 ns/op           464 B/op          3 allocs/op
-Benchmark_FastTemplate_ExecuteFuncWith10SpaceHolder-4            2383504               486.6 ns/op           104 B/op          9 allocs/op
-Benchmark_easytmpl_ExecuteFuncWith10SpaceHolder-4              2812179               362.3 ns/op           104 B/op          9 allocs/op
+Benchmark_GoTextTemplate_ExecuteWith10PlaceHolder-4               497427              2177 ns/op             464 B/op         20 allocs/op
+Benchmark_FastTemplate_ExecuteStringWith10PlaceHolder-4          1920590               749.1 ns/op           443 B/op         12 allocs/op
+Benchmark_easytmpl_ExecuteStringWith10PlaceHolder-4            3118250               554.4 ns/op           464 B/op          3 allocs/op
+Benchmark_FastTemplate_ExecuteFuncWith10PlaceHolder-4            2383504               486.6 ns/op           104 B/op          9 allocs/op
+Benchmark_easytmpl_ExecuteFuncWith10PlaceHolder-4              2812179               362.3 ns/op           104 B/op          9 allocs/op
 PASS
 ok      github.com/tylitianrui/easytmpl/timing        9.356s
 
@@ -36,11 +36,11 @@ goos: darwin
 goarch: amd64
 pkg: github.com/tylitianrui/easytmpl/timing
 cpu: Intel(R) Core(TM) i5-7360U CPU @ 2.30GHz
-Benchmark_GoTextTemplate_ExecuteWith20SpaceHolder-4               329619              3404 ns/op             880 B/op         38 allocs/op
-Benchmark_FastTemplate_ExecuteStringWith20SpaceHolder-4          1256984               930.8 ns/op           920 B/op         22 allocs/op
-Benchmark_easytmpl_ExecuteStringWith20SpaceHolder-4            1870140               639.3 ns/op           880 B/op          3 allocs/op
-Benchmark_FastTemplate_ExecuteFuncWith20SpaceHolder-4            1893668               618.1 ns/op           208 B/op         18 allocs/op
-Benchmark_easytmpl_ExecuteFuncWith20SpaceHolder-4              1864115               615.9 ns/op           208 B/op         18 allocs/op
+Benchmark_GoTextTemplate_ExecuteWith20PlaceHolder-4               329619              3404 ns/op             880 B/op         38 allocs/op
+Benchmark_FastTemplate_ExecuteStringWith20PlaceHolder-4          1256984               930.8 ns/op           920 B/op         22 allocs/op
+Benchmark_easytmpl_ExecuteStringWith20PlaceHolder-4            1870140               639.3 ns/op           880 B/op          3 allocs/op
+Benchmark_FastTemplate_ExecuteFuncWith20PlaceHolder-4            1893668               618.1 ns/op           208 B/op         18 allocs/op
+Benchmark_easytmpl_ExecuteFuncWith20PlaceHolder-4              1864115               615.9 ns/op           208 B/op         18 allocs/op
 PASS
 ok      github.com/tylitianrui/easytmpl/timing        9.133s
 
@@ -53,11 +53,11 @@ goos: darwin
 goarch: amd64
 pkg: github.com/tylitianrui/easytmpl/timing
 cpu: Intel(R) Core(TM) i5-7360U CPU @ 2.30GHz
-Benchmark_GoTextTemplate_ExecuteWith30SpaceHolder-4               210078              5882 ns/op            1296 B/op         56 allocs/op
-Benchmark_FastTemplate_ExecuteStringWith30SpaceHolder-4           723781              1556 ns/op            1623 B/op         32 allocs/op
-Benchmark_easytmpl_ExecuteStringWith30SpaceHolder-4            1234134               962.6 ns/op          1328 B/op          3 allocs/op
-Benchmark_FastTemplate_ExecuteFuncWith30SpaceHolder-4            1000000              1024 ns/op             312 B/op         27 allocs/op
-Benchmark_easytmpl_ExecuteFuncWith30SpaceHolder-4              1192578              1122 ns/op             312 B/op         27 allocs/op
+Benchmark_GoTextTemplate_ExecuteWith30PlaceHolder-4               210078              5882 ns/op            1296 B/op         56 allocs/op
+Benchmark_FastTemplate_ExecuteStringWith30PlaceHolder-4           723781              1556 ns/op            1623 B/op         32 allocs/op
+Benchmark_easytmpl_ExecuteStringWith30PlaceHolder-4            1234134               962.6 ns/op          1328 B/op          3 allocs/op
+Benchmark_FastTemplate_ExecuteFuncWith30PlaceHolder-4            1000000              1024 ns/op             312 B/op         27 allocs/op
+Benchmark_easytmpl_ExecuteFuncWith30PlaceHolder-4              1192578              1122 ns/op             312 B/op         27 allocs/op
 PASS
 ok      github.com/tylitianrui/easytmpl/timing        9.353s
 ```
