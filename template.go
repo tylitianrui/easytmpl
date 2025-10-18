@@ -116,14 +116,16 @@ func (t *Template) parse() {
 
 }
 
-// SpaceHolders get space holders of the template.
-func (t *Template) SpaceHolders() map[string]int {
-	spaceHolder := make(map[string]int, len(t.args))
+// Placeholder get all placeholders of the template.
+// it returns a map wherein each key is a template placeholder, and
+// its corresponding value is the count of that placeholder.
+func (t *Template) Placeholder() map[string]int {
+	placeholder := make(map[string]int, len(t.args))
 	for i := 0; i < len(t.args); i++ {
-		count := spaceHolder[b2s(t.args[i])]
-		spaceHolder[b2s(t.args[i])] = count + 1
+		count := placeholder[b2s(t.args[i])]
+		placeholder[b2s(t.args[i])] = count + 1
 	}
-	return spaceHolder
+	return placeholder
 
 }
 

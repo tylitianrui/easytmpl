@@ -4,7 +4,7 @@ import (
 	"fmt"
 )
 
-func ExampleExecString_NonStrictMode() {
+func ExampleTemplate_ExecString_NonStrictMode() {
 	tpl := "https://{{demain}}.com?name={{name}}&age={{age}}&birth={{birth}}"
 
 	// Create a new template instance with default tag pair `{{ }}` and pre-allocated memory of 1024 bytes.
@@ -36,7 +36,7 @@ func ExampleExecString_NonStrictMode() {
 	// template: https://user.google.com?name=tyltr&age=18&birth={{birth}}
 }
 
-func ExampleExecString_NonStrictModeAndAutoFill() {
+func ExampleTemplate_ExecString_NonStrictModeAndAutoFill() {
 	tpl := "https://[[demain]].com?name=[[name]]&age=[[age]]&birth=[[birth]]"
 	t, err := NewTemplate(tpl,
 		WithTagPair("[[", "]]"),     // set custom tag pair `[[` & `]]`
@@ -67,7 +67,7 @@ func ExampleExecString_NonStrictModeAndAutoFill() {
 	// template: https://user.google.com?name=tyltr&age=18&birth=
 }
 
-func ExampleExecString_StrictMode() {
+func ExampleTemplate_ExecString_StrictMode() {
 	tpl := "https://{{demain}}.com?name={{name}}&age={{age}}&birth={{birth}}"
 	t, err := NewTemplate(tpl,
 		WithTagPair("{{", "}}"),

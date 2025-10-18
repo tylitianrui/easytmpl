@@ -25,32 +25,32 @@ var args = map[string]string{
 
 var (
 
-	// TemplateWith10SpaceHolder Template with 10 placeholders.
-	TemplateWith10SpaceHolder = "https://{{domain}}.com?uid={{uid}}&name={{name}}&from={{from}}&to={{to}}&birthday={{birthday}}&lang={{language}}&ref={{ref}}&t={{t}}"
+	// TemplateWith10PlaceholderTemplate with 10 placeholders.
+	TemplateWith10Placeholder = "https://{{domain}}.com?uid={{uid}}&name={{name}}&from={{from}}&to={{to}}&birthday={{birthday}}&lang={{language}}&ref={{ref}}&t={{t}}"
 
-	// ExpectedResultTemplateWith10SpaceHolder expected result of template with 10 placeholders after rendering.
-	ExpectedResultTemplateWith10SpaceHolder = "https://example.com?uid=12345&name=tyltr&from=NY&to=LA&birthday=2024-01-01&lang=en&ref=go.template&t=169611111199900000222"
+	// ExpectedResultTemplateWith10Placeholderexpected result of template with 10 placeholders after rendering.
+	ExpectedResultTemplateWith10Placeholder = "https://example.com?uid=12345&name=tyltr&from=NY&to=LA&birthday=2024-01-01&lang=en&ref=go.template&t=169611111199900000222"
 
-	// ExpectedResultTemplateWith10SpaceHolderBytes
-	ExpectedResultTemplateWith10SpaceHolderBytes = []byte(ExpectedResultTemplateWith10SpaceHolder)
+	// ExpectedResultTemplateWith10PlaceholderBytes
+	ExpectedResultTemplateWith10PlaceholderBytes = []byte(ExpectedResultTemplateWith10Placeholder)
 
 	// Template with 20 placeholders
-	TemplateWith20SpaceHolder = TemplateWith10SpaceHolder + TemplateWith10SpaceHolder
+	TemplateWith20Placeholder = TemplateWith10Placeholder + TemplateWith10Placeholder
 
 	// result of template with 20 placeholders after rendering
-	ExpectedResultTemplateWith20SpaceHolder = ExpectedResultTemplateWith10SpaceHolder + ExpectedResultTemplateWith10SpaceHolder
+	ExpectedResultTemplateWith20Placeholder = ExpectedResultTemplateWith10Placeholder + ExpectedResultTemplateWith10Placeholder
 
-	// ExpectedResultTemplateWith20SpaceHolderBytes
-	ExpectedResultTemplateWith20SpaceHolderBytes = []byte(ExpectedResultTemplateWith20SpaceHolder)
+	// ExpectedResultTemplateWith20PlaceholderBytes
+	ExpectedResultTemplateWith20PlaceholderBytes = []byte(ExpectedResultTemplateWith20Placeholder)
 
 	// Template with 30 placeholders
-	TemplateWith30SpaceHolder = TemplateWith10SpaceHolder + TemplateWith10SpaceHolder + TemplateWith10SpaceHolder
+	TemplateWith30Placeholder = TemplateWith10Placeholder + TemplateWith10Placeholder + TemplateWith10Placeholder
 
 	// result of template with 30 placeholders after rendering
-	ExpectedResultTemplateWith30SpaceHolder = ExpectedResultTemplateWith10SpaceHolder + ExpectedResultTemplateWith10SpaceHolder + ExpectedResultTemplateWith10SpaceHolder
+	ExpectedResultTemplateWith30Placeholder = ExpectedResultTemplateWith10Placeholder + ExpectedResultTemplateWith10Placeholder + ExpectedResultTemplateWith10Placeholder
 
-	// ExpectedResultTemplateWith30SpaceHolderBytes
-	ExpectedResultTemplateWith30SpaceHolderBytes = []byte(ExpectedResultTemplateWith30SpaceHolder)
+	// ExpectedResultTemplateWith30PlaceholderBytes
+	ExpectedResultTemplateWith30PlaceholderBytes = []byte(ExpectedResultTemplateWith30Placeholder)
 )
 
 func rendingFunc(w io.Writer, key string) (int, error) {
@@ -60,8 +60,8 @@ func rendingFunc(w io.Writer, key string) (int, error) {
 	return 0, nil
 }
 
-func Benchmark_GoTextTemplate_ExecuteWith10SpaceHolder(b *testing.B) {
-	tpl1 := strings.Replace(TemplateWith10SpaceHolder, "{{", "{{.", -1)
+func Benchmark_GoTextTemplate_ExecuteWith10Placeholder(b *testing.B) {
+	tpl1 := strings.Replace(TemplateWith10Placeholder, "{{", "{{.", -1)
 	t, err := template.New("go text template").Parse(tpl1)
 	if err != nil {
 		b.Fatalf("Error when parsing template: %s", err)
@@ -74,8 +74,8 @@ func Benchmark_GoTextTemplate_ExecuteWith10SpaceHolder(b *testing.B) {
 				b.Fatalf("error when executing template: %s", err)
 			}
 			x := w.String()
-			if x != ExpectedResultTemplateWith10SpaceHolder {
-				b.Fatalf("unexpected result\n%s\nExpected\n%s\n", x, ExpectedResultTemplateWith10SpaceHolder)
+			if x != ExpectedResultTemplateWith10Placeholder {
+				b.Fatalf("unexpected result\n%s\nExpected\n%s\n", x, ExpectedResultTemplateWith10Placeholder)
 			}
 			w.Reset()
 		}
@@ -83,9 +83,9 @@ func Benchmark_GoTextTemplate_ExecuteWith10SpaceHolder(b *testing.B) {
 
 }
 
-func Benchmark_FastTemplate_ExecuteStringWith10SpaceHolder(b *testing.B) {
+func Benchmark_FastTemplate_ExecuteStringWith10Placeholder(b *testing.B) {
 
-	t, err := fasttemplate.NewTemplate(TemplateWith10SpaceHolder, "{{", "}}")
+	t, err := fasttemplate.NewTemplate(TemplateWith10Placeholder, "{{", "}}")
 	if err != nil {
 		b.Fatalf("error in template: %s", err)
 	}
@@ -99,15 +99,15 @@ func Benchmark_FastTemplate_ExecuteStringWith10SpaceHolder(b *testing.B) {
 
 		for pb.Next() {
 			x := t.ExecuteString(mm)
-			if x != ExpectedResultTemplateWith10SpaceHolder {
-				b.Fatalf("unexpected result\n%q\nExpected\n%q\n", x, ExpectedResultTemplateWith10SpaceHolder)
+			if x != ExpectedResultTemplateWith10Placeholder {
+				b.Fatalf("unexpected result\n%q\nExpected\n%q\n", x, ExpectedResultTemplateWith10Placeholder)
 			}
 		}
 	})
 }
 
-func Benchmark_EasyTmpl_ExecuteStringWith10SpaceHolder(b *testing.B) {
-	t, err := easytmpl.NewTemplate(TemplateWith10SpaceHolder)
+func Benchmark_EasyTmpl_ExecuteStringWith10Placeholder(b *testing.B) {
+	t, err := easytmpl.NewTemplate(TemplateWith10Placeholder)
 	if err != nil {
 		b.Fatalf("error in template: %s", err)
 	}
@@ -119,15 +119,15 @@ func Benchmark_EasyTmpl_ExecuteStringWith10SpaceHolder(b *testing.B) {
 			if err != nil {
 				b.Fatalf("error when executing template: %s", err)
 			}
-			if x != ExpectedResultTemplateWith10SpaceHolder {
-				b.Fatalf("unexpected result\n%s\nExpected\n%s\n", x, ExpectedResultTemplateWith10SpaceHolder)
+			if x != ExpectedResultTemplateWith10Placeholder {
+				b.Fatalf("unexpected result\n%s\nExpected\n%s\n", x, ExpectedResultTemplateWith10Placeholder)
 			}
 		}
 	})
 }
 
-func Benchmark_FastTemplate_ExecuteFuncWith10SpaceHolder(b *testing.B) {
-	t, err := fasttemplate.NewTemplate(TemplateWith10SpaceHolder, "{{", "}}")
+func Benchmark_FastTemplate_ExecuteFuncWith10Placeholder(b *testing.B) {
+	t, err := fasttemplate.NewTemplate(TemplateWith10Placeholder, "{{", "}}")
 	if err != nil {
 		b.Fatalf("error in template: %s", err)
 	}
@@ -140,16 +140,16 @@ func Benchmark_FastTemplate_ExecuteFuncWith10SpaceHolder(b *testing.B) {
 				b.Fatalf("unexpected error: %s", err)
 			}
 			x := w.Bytes()
-			if !bytes.Equal(x, ExpectedResultTemplateWith10SpaceHolderBytes) {
-				b.Fatalf("unexpected result\n%q\nExpected\n%q\n", x, ExpectedResultTemplateWith10SpaceHolderBytes)
+			if !bytes.Equal(x, ExpectedResultTemplateWith10PlaceholderBytes) {
+				b.Fatalf("unexpected result\n%q\nExpected\n%q\n", x, ExpectedResultTemplateWith10PlaceholderBytes)
 			}
 			w.Reset()
 		}
 	})
 }
 
-func Benchmark_EasyTmpl_ExecuteFuncWith10SpaceHolder(b *testing.B) {
-	t, err := easytmpl.NewTemplate(TemplateWith10SpaceHolder)
+func Benchmark_EasyTmpl_ExecuteFuncWith10Placeholder(b *testing.B) {
+	t, err := easytmpl.NewTemplate(TemplateWith10Placeholder)
 	if err != nil {
 		b.Fatalf("error in template: %s", err)
 	}
@@ -165,16 +165,16 @@ func Benchmark_EasyTmpl_ExecuteFuncWith10SpaceHolder(b *testing.B) {
 		for pb.Next() {
 			t.ExecuteFunc(&w, rendingFunc)
 			x := w.Bytes()
-			if !bytes.Equal(x, ExpectedResultTemplateWith10SpaceHolderBytes) {
-				b.Fatalf("unexpected result\n%q\nExpected\n%q\n", x, ExpectedResultTemplateWith10SpaceHolderBytes)
+			if !bytes.Equal(x, ExpectedResultTemplateWith10PlaceholderBytes) {
+				b.Fatalf("unexpected result\n%q\nExpected\n%q\n", x, ExpectedResultTemplateWith10PlaceholderBytes)
 			}
 			w.Reset()
 		}
 	})
 }
 
-func Benchmark_GoTextTemplate_ExecuteWith20SpaceHolder(b *testing.B) {
-	tpl := strings.Replace(TemplateWith20SpaceHolder, "{{", "{{.", -1)
+func Benchmark_GoTextTemplate_ExecuteWith20Placeholder(b *testing.B) {
+	tpl := strings.Replace(TemplateWith20Placeholder, "{{", "{{.", -1)
 	t, err := template.New("go text template").Parse(tpl)
 	if err != nil {
 		b.Fatalf("Error when parsing template: %s", err)
@@ -187,8 +187,8 @@ func Benchmark_GoTextTemplate_ExecuteWith20SpaceHolder(b *testing.B) {
 				b.Fatalf("error when executing template: %s", err)
 			}
 			x := w.String()
-			if x != ExpectedResultTemplateWith20SpaceHolder {
-				b.Fatalf("unexpected result\n%s\nExpected\n%s\n", x, ExpectedResultTemplateWith20SpaceHolder)
+			if x != ExpectedResultTemplateWith20Placeholder {
+				b.Fatalf("unexpected result\n%s\nExpected\n%s\n", x, ExpectedResultTemplateWith20Placeholder)
 			}
 			w.Reset()
 		}
@@ -196,9 +196,9 @@ func Benchmark_GoTextTemplate_ExecuteWith20SpaceHolder(b *testing.B) {
 
 }
 
-func Benchmark_FastTemplate_ExecuteStringWith20SpaceHolder(b *testing.B) {
+func Benchmark_FastTemplate_ExecuteStringWith20Placeholder(b *testing.B) {
 
-	t, err := fasttemplate.NewTemplate(TemplateWith20SpaceHolder, "{{", "}}")
+	t, err := fasttemplate.NewTemplate(TemplateWith20Placeholder, "{{", "}}")
 	if err != nil {
 		b.Fatalf("error in template: %s", err)
 	}
@@ -212,15 +212,15 @@ func Benchmark_FastTemplate_ExecuteStringWith20SpaceHolder(b *testing.B) {
 
 		for pb.Next() {
 			x := t.ExecuteString(mm)
-			if x != ExpectedResultTemplateWith20SpaceHolder {
-				b.Fatalf("unexpected result\n%q\nExpected\n%q\n", x, ExpectedResultTemplateWith20SpaceHolder)
+			if x != ExpectedResultTemplateWith20Placeholder {
+				b.Fatalf("unexpected result\n%q\nExpected\n%q\n", x, ExpectedResultTemplateWith20Placeholder)
 			}
 		}
 	})
 }
 
-func Benchmark_EasyTmpl_ExecuteStringWith20SpaceHolder(b *testing.B) {
-	t, err := easytmpl.NewTemplate(TemplateWith20SpaceHolder)
+func Benchmark_EasyTmpl_ExecuteStringWith20Placeholder(b *testing.B) {
+	t, err := easytmpl.NewTemplate(TemplateWith20Placeholder)
 	if err != nil {
 		b.Fatalf("error in template: %s", err)
 	}
@@ -232,15 +232,15 @@ func Benchmark_EasyTmpl_ExecuteStringWith20SpaceHolder(b *testing.B) {
 			if err != nil {
 				b.Fatalf("error when executing template: %s", err)
 			}
-			if x != ExpectedResultTemplateWith20SpaceHolder {
-				b.Fatalf("unexpected result\n%s\nExpected\n%s\n", x, ExpectedResultTemplateWith20SpaceHolder)
+			if x != ExpectedResultTemplateWith20Placeholder {
+				b.Fatalf("unexpected result\n%s\nExpected\n%s\n", x, ExpectedResultTemplateWith20Placeholder)
 			}
 		}
 	})
 }
 
-func Benchmark_FastTemplate_ExecuteFuncWith20SpaceHolder(b *testing.B) {
-	t, err := fasttemplate.NewTemplate(TemplateWith20SpaceHolder, "{{", "}}")
+func Benchmark_FastTemplate_ExecuteFuncWith20Placeholder(b *testing.B) {
+	t, err := fasttemplate.NewTemplate(TemplateWith20Placeholder, "{{", "}}")
 	if err != nil {
 		b.Fatalf("error in template: %s", err)
 	}
@@ -253,16 +253,16 @@ func Benchmark_FastTemplate_ExecuteFuncWith20SpaceHolder(b *testing.B) {
 				b.Fatalf("unexpected error: %s", err)
 			}
 			x := w.Bytes()
-			if !bytes.Equal(x, ExpectedResultTemplateWith20SpaceHolderBytes) {
-				b.Fatalf("unexpected result\n%q\nExpected\n%q\n", x, ExpectedResultTemplateWith20SpaceHolderBytes)
+			if !bytes.Equal(x, ExpectedResultTemplateWith20PlaceholderBytes) {
+				b.Fatalf("unexpected result\n%q\nExpected\n%q\n", x, ExpectedResultTemplateWith20PlaceholderBytes)
 			}
 			w.Reset()
 		}
 	})
 }
 
-func Benchmark_EasyTmpl_ExecuteFuncWith20SpaceHolder(b *testing.B) {
-	t, err := easytmpl.NewTemplate(TemplateWith20SpaceHolder)
+func Benchmark_EasyTmpl_ExecuteFuncWith20Placeholder(b *testing.B) {
+	t, err := easytmpl.NewTemplate(TemplateWith20Placeholder)
 	if err != nil {
 		b.Fatalf("error in template: %s", err)
 	}
@@ -278,16 +278,16 @@ func Benchmark_EasyTmpl_ExecuteFuncWith20SpaceHolder(b *testing.B) {
 		for pb.Next() {
 			t.ExecuteFunc(&w, rendingFunc)
 			x := w.Bytes()
-			if !bytes.Equal(x, ExpectedResultTemplateWith20SpaceHolderBytes) {
-				b.Fatalf("unexpected result\n%q\nExpected\n%q\n", x, ExpectedResultTemplateWith20SpaceHolderBytes)
+			if !bytes.Equal(x, ExpectedResultTemplateWith20PlaceholderBytes) {
+				b.Fatalf("unexpected result\n%q\nExpected\n%q\n", x, ExpectedResultTemplateWith20PlaceholderBytes)
 			}
 			w.Reset()
 		}
 	})
 }
 
-func Benchmark_GoTextTemplate_ExecuteWith30SpaceHolder(b *testing.B) {
-	tpl := strings.Replace(TemplateWith30SpaceHolder, "{{", "{{.", -1)
+func Benchmark_GoTextTemplate_ExecuteWith30Placeholder(b *testing.B) {
+	tpl := strings.Replace(TemplateWith30Placeholder, "{{", "{{.", -1)
 	t, err := template.New("go text template").Parse(tpl)
 	if err != nil {
 		b.Fatalf("Error when parsing template: %s", err)
@@ -300,8 +300,8 @@ func Benchmark_GoTextTemplate_ExecuteWith30SpaceHolder(b *testing.B) {
 				b.Fatalf("error when executing template: %s", err)
 			}
 			x := w.String()
-			if x != ExpectedResultTemplateWith30SpaceHolder {
-				b.Fatalf("unexpected result\n%s\nExpected\n%s\n", x, ExpectedResultTemplateWith30SpaceHolder)
+			if x != ExpectedResultTemplateWith30Placeholder {
+				b.Fatalf("unexpected result\n%s\nExpected\n%s\n", x, ExpectedResultTemplateWith30Placeholder)
 			}
 			w.Reset()
 		}
@@ -309,9 +309,9 @@ func Benchmark_GoTextTemplate_ExecuteWith30SpaceHolder(b *testing.B) {
 
 }
 
-func Benchmark_FastTemplate_ExecuteStringWith30SpaceHolder(b *testing.B) {
+func Benchmark_FastTemplate_ExecuteStringWith30Placeholder(b *testing.B) {
 
-	t, err := fasttemplate.NewTemplate(TemplateWith30SpaceHolder, "{{", "}}")
+	t, err := fasttemplate.NewTemplate(TemplateWith30Placeholder, "{{", "}}")
 	if err != nil {
 		b.Fatalf("error in template: %s", err)
 	}
@@ -325,15 +325,15 @@ func Benchmark_FastTemplate_ExecuteStringWith30SpaceHolder(b *testing.B) {
 
 		for pb.Next() {
 			x := t.ExecuteString(mm)
-			if x != ExpectedResultTemplateWith30SpaceHolder {
-				b.Fatalf("unexpected result\n%q\nExpected\n%q\n", x, ExpectedResultTemplateWith30SpaceHolder)
+			if x != ExpectedResultTemplateWith30Placeholder {
+				b.Fatalf("unexpected result\n%q\nExpected\n%q\n", x, ExpectedResultTemplateWith30Placeholder)
 			}
 		}
 	})
 }
 
-func Benchmark_EasyTmpl_ExecuteStringWith30SpaceHolder(b *testing.B) {
-	t, err := easytmpl.NewTemplate(TemplateWith30SpaceHolder)
+func Benchmark_EasyTmpl_ExecuteStringWith30Placeholder(b *testing.B) {
+	t, err := easytmpl.NewTemplate(TemplateWith30Placeholder)
 	if err != nil {
 		b.Fatalf("error in template: %s", err)
 	}
@@ -345,15 +345,15 @@ func Benchmark_EasyTmpl_ExecuteStringWith30SpaceHolder(b *testing.B) {
 			if err != nil {
 				b.Fatalf("error when executing template: %s", err)
 			}
-			if x != ExpectedResultTemplateWith30SpaceHolder {
-				b.Fatalf("unexpected result\n%s\nExpected\n%s\n", x, ExpectedResultTemplateWith30SpaceHolder)
+			if x != ExpectedResultTemplateWith30Placeholder {
+				b.Fatalf("unexpected result\n%s\nExpected\n%s\n", x, ExpectedResultTemplateWith30Placeholder)
 			}
 		}
 	})
 }
 
-func Benchmark_FastTemplate_ExecuteFuncWith30SpaceHolder(b *testing.B) {
-	t, err := fasttemplate.NewTemplate(TemplateWith30SpaceHolder, "{{", "}}")
+func Benchmark_FastTemplate_ExecuteFuncWith30Placeholder(b *testing.B) {
+	t, err := fasttemplate.NewTemplate(TemplateWith30Placeholder, "{{", "}}")
 	if err != nil {
 		b.Fatalf("error in template: %s", err)
 	}
@@ -366,16 +366,16 @@ func Benchmark_FastTemplate_ExecuteFuncWith30SpaceHolder(b *testing.B) {
 				b.Fatalf("unexpected error: %s", err)
 			}
 			x := w.Bytes()
-			if !bytes.Equal(x, ExpectedResultTemplateWith30SpaceHolderBytes) {
-				b.Fatalf("unexpected result\n%q\nExpected\n%q\n", x, ExpectedResultTemplateWith30SpaceHolderBytes)
+			if !bytes.Equal(x, ExpectedResultTemplateWith30PlaceholderBytes) {
+				b.Fatalf("unexpected result\n%q\nExpected\n%q\n", x, ExpectedResultTemplateWith30PlaceholderBytes)
 			}
 			w.Reset()
 		}
 	})
 }
 
-func Benchmark_EasyTmpl_ExecuteFuncWith30SpaceHolder(b *testing.B) {
-	t, err := easytmpl.NewTemplate(TemplateWith30SpaceHolder)
+func Benchmark_EasyTmpl_ExecuteFuncWith30Placeholder(b *testing.B) {
+	t, err := easytmpl.NewTemplate(TemplateWith30Placeholder)
 	if err != nil {
 		b.Fatalf("error in template: %s", err)
 	}
@@ -391,8 +391,8 @@ func Benchmark_EasyTmpl_ExecuteFuncWith30SpaceHolder(b *testing.B) {
 		for pb.Next() {
 			t.ExecuteFunc(&w, rendingFunc)
 			x := w.Bytes()
-			if !bytes.Equal(x, ExpectedResultTemplateWith30SpaceHolderBytes) {
-				b.Fatalf("unexpected result\n%q\nExpected\n%q\n", x, ExpectedResultTemplateWith30SpaceHolderBytes)
+			if !bytes.Equal(x, ExpectedResultTemplateWith30PlaceholderBytes) {
+				b.Fatalf("unexpected result\n%q\nExpected\n%q\n", x, ExpectedResultTemplateWith30PlaceholderBytes)
 			}
 			w.Reset()
 		}

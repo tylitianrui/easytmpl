@@ -272,3 +272,23 @@ func TestTemplate_Exec(t *testing.T) {
 		}
 	})
 }
+
+func TestTemplate_Placeholder(t *testing.T) {
+	t.Run("case: get placeholders of template", func(t *testing.T) {
+		txt := "i am {{name}}, {{age}} year old, from {{country}},welcome {{name}}"
+		template, err := NewTemplate(txt)
+		if err != nil {
+			t.Errorf("error %v", err)
+		}
+		got := template.Placeholder()
+		want := map[string]int{
+			"name":    2,
+			"age":     1,
+			"country": 1,
+		}
+		if !reflect.DeepEqual(got, want) {
+			t.Errorf("got %v  want:%v", got, want)
+		}
+
+	})
+}
